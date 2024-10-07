@@ -4,14 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.uvg.rickandmorty.presentation.character.CharacterNavGraph
-import com.uvg.rickandmorty.presentation.character.characterGraph
-import com.uvg.rickandmorty.presentation.character.navigateToCharacterGraph
 import com.uvg.rickandmorty.presentation.login.LoginDestination
 import com.uvg.rickandmorty.presentation.login.loginScreen
+import com.uvg.rickandmorty.presentation.mainFlow.mainNavigationGraph
+import com.uvg.rickandmorty.presentation.mainFlow.navigateToMainGraph
 
 @Composable
 fun AppNavigation(
@@ -25,13 +23,19 @@ fun AppNavigation(
     ) {
         loginScreen(
             onLoginClick = {
-                navController.navigateToCharacterGraph(
+                navController.navigateToMainGraph(
                     navOptions = NavOptions.Builder().setPopUpTo<LoginDestination>(
                         inclusive = true
                     ).build()
                 )
             }
         )
-        characterGraph(navController)
+        mainNavigationGraph(
+            onLogOutClick = {
+                navController.navigate(LoginDestination) {
+                    popUpTo(0)
+                }
+            }
+        )
     }
 }
