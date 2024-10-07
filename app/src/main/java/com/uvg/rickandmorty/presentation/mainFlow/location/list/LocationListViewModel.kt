@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import com.uvg.rickandmorty.data.model.Location
 import com.uvg.rickandmorty.data.source.LocationDb
+import com.uvg.rickandmorty.presentation.mainFlow.character.list.CharacterListState
 
 data class LocationListState(
     val isLoading: Boolean = false,
@@ -37,6 +38,11 @@ class LocationListViewModel : ViewModel() {
             }
         }
     }
+
+    fun showError() {
+        _state.value = LocationListState(hasError = true)
+    }
+
 
     fun retry() {
         fetchLocations()

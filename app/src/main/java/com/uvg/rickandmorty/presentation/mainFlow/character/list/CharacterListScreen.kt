@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.uvg.rickandmorty.data.model.Character
-import com.uvg.rickandmorty.data.source.CharacterDb
 import com.uvg.rickandmorty.presentation.ui.theme.RickAndMortyTheme
 
 @Composable
@@ -27,7 +26,7 @@ fun CharacterListScreen(
 
     when {
         state.isLoading -> {
-            LoadingScreen { viewModel.retry() }
+            LoadingScreen { viewModel.showError() }
         }
         state.hasError -> {
             ErrorScreen { viewModel.retry() }
@@ -98,20 +97,6 @@ fun ErrorScreen(onRetry: () -> Unit) {
             Button(onClick = onRetry) {
                 Text(text = "Reintentar")
             }
-        }
-    }
-}
-
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun PreviewCharacterListScreen() {
-    RickAndMortyTheme {
-        Surface {
-            val db = CharacterDb()
-            CharacterListScreen(
-                onCharacterClick = {}
-            )
         }
     }
 }

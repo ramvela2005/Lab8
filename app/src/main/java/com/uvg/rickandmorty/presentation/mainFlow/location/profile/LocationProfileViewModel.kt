@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uvg.rickandmorty.data.model.Location
 import com.uvg.rickandmorty.data.source.LocationDb
+import com.uvg.rickandmorty.presentation.mainFlow.character.list.CharacterListState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,6 +33,10 @@ class LocationProfileViewModel : ViewModel() {
                 _state.value = LocationProfileState(hasError = true)
             }
         }
+    }
+
+    fun showError() {
+        _state.value = LocationProfileState(hasError = true)
     }
 
     fun retry(locationId: Int) {

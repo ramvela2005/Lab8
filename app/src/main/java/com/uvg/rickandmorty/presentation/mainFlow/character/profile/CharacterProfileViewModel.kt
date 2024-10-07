@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uvg.rickandmorty.data.model.Character
 import com.uvg.rickandmorty.data.source.CharacterDb
+import com.uvg.rickandmorty.presentation.mainFlow.character.list.CharacterListState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,8 +35,13 @@ class CharacterProfileViewModel : ViewModel() {
         }
     }
 
+    fun showError() {
+        _state.value = CharacterProfileState(hasError = true)
+    }
+
     fun retry(characterId: Int) {
         fetchCharacter(characterId)
     }
 }
+
 

@@ -37,6 +37,9 @@ class CharacterListViewModel : ViewModel() {
             }
         }
     }
+    fun showError() {
+        _state.value = CharacterListState(hasError = true)
+    }
 
     fun retry() {
         fetchCharacters()
