@@ -1,5 +1,6 @@
 package com.uvg.rickandmorty
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,6 +23,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -31,6 +35,7 @@ import com.uvg.rickandmorty.presentation.navigation.AppNavigation
 import com.uvg.rickandmorty.presentation.navigation.BottomNavBar
 import com.uvg.rickandmorty.presentation.navigation.topLevelDestinations
 import com.uvg.rickandmorty.presentation.ui.theme.RickAndMortyTheme
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_preferences")
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
